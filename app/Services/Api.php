@@ -35,8 +35,8 @@ class Api implements ApiInterface
     
     public function setDateRange(array $dateRange = [])
     {
-        $this->endDate = $dateRange['enddate-filter'] ?? $this->today->format(self::DATE_FORMAT);
-        $this->startDate = $dateRange['startdate-filter'] ?? $this->today->subDays(self::DEFAULT_DAYS_AGO)->format(self::DATE_FORMAT);
+        $this->endDate = $dateRange['end-date'] ?? $this->today->format(self::DATE_FORMAT);
+        $this->startDate = $dateRange['start-date'] ?? $this->today->subDays(self::DEFAULT_DAYS_AGO)->format(self::DATE_FORMAT);
         return $this;
     }
     

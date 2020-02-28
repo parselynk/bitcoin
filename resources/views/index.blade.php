@@ -10,6 +10,19 @@
     <body>
         <div class="container-fluid">
         <div class="row justify-content-center col-md-12" >
+            @if ($errors->any())
+                <div class="alert alert-danger ml-5 mt-5" style="width:90%">
+                    <ul>
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            @elseif(Session::has('message'))
+                <div class="alert alert-danger ml-5 mt-5" role="alert" style="width:90%">
+                   @yield('message')
+                </div>
+            @endif
             <div class="card mt-5 ml-5" style="width:90%">
                 <div class="card-header">
                     Date Range 
@@ -18,11 +31,11 @@
                     <form class="form-inline" method="GET" action="{{ request()->path() }}">
                     <div class="form-group col-md-3">
                         <label for="start-date" class="mb-3 mr-1" >Since:</label>
-                        <input id="start-date" name="startdate-filter" data-provide="datepicker" data-date-format="yyyy-mm-dd"  class="form-control mb-3 mr-sm-3 datepicker w-75" style="width: auto" value = "{{ !empty(request('startdate-filter')) ? request('startdate-filter') : Carbon\Carbon::today()->subDays(10)->format('Y-m-d') }}">
+                        <input id="start-date" name="start-date" data-provide="datepicker" data-date-format="yyyy-mm-dd"  class="form-control mb-3 mr-sm-3 datepicker w-75" style="width: auto" value = "{{ !empty(request('start-date')) ? request('start-date') : Carbon\Carbon::today()->subDays(10)->format('Y-m-d') }}">
                     </div>
                     <div class="form-group col-md-3">
                         <label for="start-date" class="mb-3 mr-1" >Until:</label>
-                        <input id="end-date" name="enddate-filter" data-provide="datepicker" data-date-format="yyyy-mm-dd"  class="form-control mb-3 mr-sm-3 datepicker w-75" value = "{{ !empty(request('enddate-filter')) ? request('enddate-filter') : Carbon\Carbon::today()->format('Y-m-d') }}">
+                        <input id="end-date" name="end-date" data-provide="datepicker" data-date-format="yyyy-mm-dd"  class="form-control mb-3 mr-sm-3 datepicker w-75" value = "{{ !empty(request('end-date')) ? request('end-date') : Carbon\Carbon::today()->format('Y-m-d') }}">
                     </div>
                     <div class="form-group ml-auto p-2">
                       <button type="submit" class="btn btn-primary mb-3" style="width:200px">Render</button>
