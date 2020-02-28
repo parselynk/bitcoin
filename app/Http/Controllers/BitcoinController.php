@@ -3,20 +3,20 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Services\Contracts\ApiInterface;
 use App\Repositories\Contracts\BitcoinInterface;
 
 class BitcoinController extends Controller
 {
-        protected $bitcoin;
+    protected $bitcoin;
 
-    public function __construct(BitcoinInterface $bitcoin)
+    public function __construct(ApiInterface $api)
     {
-        
-        $this->bitcoin = $bitcoin;
+        $this->bitcoin = $api;
     }
 
     public function index()
     {
-        dd($this->bitcoin);
+        return response()->json($this->bitcoin->getHistoricalData()->getMappedData());
     }
 }

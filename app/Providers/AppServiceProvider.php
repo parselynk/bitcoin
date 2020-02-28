@@ -3,7 +3,7 @@
 namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
-use App\Services\GuzzleClient;
+use GuzzleHttp\Client;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -23,10 +23,9 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-            $this->app->bind('App\Repositories\Contracts\BitcoinInterface', 'App\Repositories\BitcoinRepository');
-
-            $this->app->singleton(GuzzleClient::class, function ($app) {
-                return new GuzzleClient([
+            $this->app->bind('App\Services\Contracts\ApiInterface', 'App\Services\Api');
+            $this->app->singleton(Client::class, function ($app) {
+                return new Client([
                     'base_uri' => env('BASE_URI'),
                     'timeout'  => env('CLIENT_TIMEOUT'),
                 ]);
