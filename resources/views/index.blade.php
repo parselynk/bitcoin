@@ -9,9 +9,9 @@
     </head>
     <body>
         <div class="container-fluid">
-        <div class="row justify-content-center col-md-12" >
+        <div class="row justify-content-center col-md-12 ml-1 mr-4" >
             @if ($errors->any())
-                <div class="alert alert-danger ml-5 mt-5" style="width:90%">
+                <div class="alert alert-danger mt-5 w-100">
                     <ul>
                         @foreach ($errors->all() as $error)
                             <li>{{ $error }}</li>
@@ -19,11 +19,11 @@
                     </ul>
                 </div>
             @elseif(Session::has('message'))
-                <div class="alert alert-danger ml-5 mt-5" role="alert" style="width:90%">
+                <div class="alert alert-danger mt-5 w-100" role="alert">
                    @yield('message')
                 </div>
             @endif
-            <div class="card mt-5 ml-5" style="width:90%">
+            <div class="card mt-5 w-100">
                 <div class="card-header">
                     Date Range 
                 </div>
@@ -31,11 +31,11 @@
                     <form class="form-inline" method="GET" action="{{ request()->path() }}">
                     <div class="form-group col-md-3">
                         <label for="start-date" class="mb-3 mr-1" >Since:</label>
-                        <input id="start-date" name="start-date" data-provide="datepicker" data-date-format="yyyy-mm-dd"  class="form-control mb-3 mr-sm-3 datepicker w-75" style="width: auto" value = "{{ !empty(request('start-date')) ? request('start-date') : Carbon\Carbon::today()->subDays(10)->format('Y-m-d') }}">
+                        <input id="start-date" name="start-date" data-provide="datepicker" data-date-format="yyyy-mm-dd"  class="form-control mb-3 mr-sm-3 datepicker" style="width: auto" value = "{{ !empty(request('start-date')) ? request('start-date') : Carbon\Carbon::today()->subDays(10)->format('Y-m-d') }}">
                     </div>
                     <div class="form-group col-md-3">
                         <label for="start-date" class="mb-3 mr-1" >Until:</label>
-                        <input id="end-date" name="end-date" data-provide="datepicker" data-date-format="yyyy-mm-dd"  class="form-control mb-3 mr-sm-3 datepicker w-75" value = "{{ !empty(request('end-date')) ? request('end-date') : Carbon\Carbon::today()->format('Y-m-d') }}">
+                        <input id="end-date" name="end-date" data-provide="datepicker" data-date-format="yyyy-mm-dd"  class="form-control mb-3 mr-sm-3 datepicker" value = "{{ !empty(request('end-date')) ? request('end-date') : Carbon\Carbon::today()->format('Y-m-d') }}">
                     </div>
                     <div class="form-group ml-auto p-2">
                       <button type="submit" class="btn btn-primary mb-3" style="width:200px">Render</button>
@@ -44,7 +44,7 @@
                 </div>
             </div>
         </div>
-         <div id="app" class="row justify-content-center w-100 mt-5" >
+         <div id="app" class="row justify-content-center w-100 mt-5 ml-2" >
                 <canvas id="myChart" width="700" height="700" style="max-width: 95%" ></canvas>
          </div>
     </div>
