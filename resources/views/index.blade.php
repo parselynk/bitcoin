@@ -29,12 +29,12 @@
                 </div>
                 <div class="card-body col-md-12">
                     <form class="form-inline" method="GET" action="{{ request()->path() }}">
-                    <div class="form-group col-md-3">
+                    <div class="form-group col-md-3 justify-content-end">
                         <label for="start-date" class="mb-3 mr-1" >Since:</label>
                         <input id="start-date" name="start-date" data-provide="datepicker" data-date-format="yyyy-mm-dd"  class="form-control mb-3 mr-sm-3 datepicker" style="width: auto" value = "{{ !empty(request('start-date')) ? request('start-date') : Carbon\Carbon::today()->subDays(10)->format('Y-m-d') }}">
                     </div>
-                    <div class="form-group col-md-3">
-                        <label for="start-date" class="mb-3 mr-1" >Until:</label>
+                    <div class="form-group col-md-3 justify-content-end">
+                        <label for="start-date" class="mb-3 mr-1 " >Until:</label>
                         <input id="end-date" name="end-date" data-provide="datepicker" data-date-format="yyyy-mm-dd"  class="form-control mb-3 mr-sm-3 datepicker" value = "{{ !empty(request('end-date')) ? request('end-date') : Carbon\Carbon::today()->format('Y-m-d') }}">
                     </div>
                     <div class="form-group ml-auto p-2">
@@ -59,15 +59,16 @@ var myChart = new Chart(ctx, {
     data: {
         labels: {!! $dates !!},
         datasets: [{
+            fill: false,        // 3: no fill
             label: '# price index',
             data: {!! $values !!} ,
             backgroundColor: [
                 'rgba(255, 99, 132, 0.1)',
             ],
             borderColor: [
-                'rgba(255, 99, 132, 2)',
+                'rgba(255, 99, 132, 0.9)',
             ],
-            borderWidth: 1
+            borderWidth: 2
         }]
     },
     options: {
